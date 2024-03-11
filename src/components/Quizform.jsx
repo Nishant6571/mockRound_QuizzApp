@@ -7,10 +7,11 @@ import {
   Button,
   Stack,
   Text,
-  Center, // Import Center component from Chakra UI
+  Center,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchQuizData } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const QuizForm = () => {
   const [name, setName] = useState("");
@@ -20,7 +21,7 @@ const QuizForm = () => {
 
   const { isLoading, isError } = useSelector((state) => state);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(fetchQuizData(category, difficulty, numberOfQuestions));
@@ -28,6 +29,7 @@ const QuizForm = () => {
     console.log("Category:", category);
     console.log("Difficulty:", difficulty);
     console.log("Number of Questions:", numberOfQuestions);
+    navigate("/quiz");
   };
 
   return (
